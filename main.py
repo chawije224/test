@@ -93,7 +93,7 @@ async def input(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await msg.reply_text('''
 <b>Send them in this format:</b>
 
-[<code>mpd_link</code>] [<code>license_url</code>] [<code>user_agent_header</code>]
+[<code>mpd_link</code>] [<code>license_url</code>]
     
 <b>Eg:</b> <i>https://cdn.bitmovin.com/content/assets/art-of-motion_drm/mpds/11331.mpd https://cwip-shaka-proxy.appspot.com/no_auth</i> <code>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36</code>  
 ''', parse_mode="HTML")
