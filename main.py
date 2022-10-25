@@ -8,8 +8,17 @@ from getPSSH import getPSSHs
 from time import sleep
 from download import down, decr
 import os, glob
+from pyrogram import Client
 
 dict = {}
+
+client = Client(
+    name="pyrogrammm",
+    api_id=17872567,
+    api_hash='6aea250af9d83f85a9adc8e34705415a',
+    bot_token='5452169338:AAGCq9zOWxcBz_YNp73F4dV4JIxDDfWT7Dc',
+    no_updates=True
+)
 
 app = ApplicationBuilder().token("5452169338:AAGCq9zOWxcBz_YNp73F4dV4JIxDDfWT7Dc").build()
 
@@ -61,7 +70,12 @@ def cleanup(path):
             print(f"Error deleting file: {file_list}")
 
 async def send():
-    await msg.reply_video(r'final.mp4', write_timeout=240, supports_streaming=True)
+    try:await client.start()
+    except: pass
+    #await msg.reply_video(r'final.mp4', write_timeout=240, supports_streaming=True)
+    await client.send_video(msg.chat_id, open('final.mp4', 'rb'),supports_streaming=True)
+    try:await client.stop()
+    except:pass
     cleanup(os.getcwd())
 
 async def getButtons(message):
