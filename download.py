@@ -7,7 +7,7 @@ async def down(vid, aid, url, uid):
     try:
         print(vid, aid)
         try:
-            working_dir = os.getcwd() + "\working_dir"
+            working_dir = os.getcwd() + "/working_dir"
             os.chdir(working_dir)
         except:
             pass
@@ -20,7 +20,7 @@ async def down(vid, aid, url, uid):
 async def decr(update: Update, context: ContextTypes.DEFAULT_TYPE, keys):
     try:
         try:
-            working_dir = os.getcwd() + "\working_dir"
+            working_dir = os.getcwd() + "/working_dir"
             os.chdir(working_dir)
         except:
             pass
