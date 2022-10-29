@@ -1,7 +1,7 @@
 from mpegdash.parser import MPEGDASHParser
 from button_build import ButtonMaker
-from telegram import *
-from telegram.ext import *
+from telegram import Update
+from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, CallbackQueryHandler, MessageHandler, filters
 import requests
 from getKeys import getKeyss
 from getPSSH import getPSSHs
@@ -23,7 +23,7 @@ client = Client(
 app = ApplicationBuilder().token("5452169338:AAGCq9zOWxcBz_YNp73F4dV4JIxDDfWT7Dc").build()
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("damn it!")
+    await update.message.reply_text("damn it!", quote=True)
 
 async def help(update, context):
     await update.message.reply_text('''
@@ -32,7 +32,7 @@ async def help(update, context):
 [<code>mpd_link</code>] [<code>license_url</code>]
     
 <b>Eg:</b> <i>https://cdn.bitmovin.com/content/assets/art-of-motion_drm/mpds/11331.mpd https://cwip-shaka-proxy.appspot.com/no_auth</i>  
-''', parse_mode="HTML")
+''', parse_mode="HTML", quote=True)
 
 async def calls(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
@@ -54,7 +54,7 @@ Chose audio quality for download
         print(dict)
         result = await down(vid_id, aud_id, mpdURL, user)
         if result == 'OK':
-            result2 = await decr(update, context, keys)
+            result2 = await decr(keys)
             if result2 == 'OK':
                 await send()
 
@@ -73,7 +73,7 @@ async def send():
     try:await client.start()
     except: pass
     #await msg.reply_video(r'final.mp4', write_timeout=240, supports_streaming=True)
-    await client.send_video(msg.chat_id, open('final.mp4', 'rb'),supports_streaming=True)
+    await client.send_video(msg.chat_id, open('final.mp4', 'rb'),supports_streaming=True, reply_to_message_id=msg.id)
     try:await client.stop()
     except:pass
     cleanup(os.getcwd())
@@ -107,13 +107,13 @@ async def input(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await msg.reply_text('''
 <b>Send them in this format:</b>
 
-[<code>mpd_link</code>] [<code>license_url</code>]
+[<code>mpd_link</code>] [<code>license_url</code>] [<code>user_agent_header</code>]
     
-<b>Eg:</b> <i>https://cdn.bitmovin.com/content/assets/art-of-motion_drm/mpds/11331.mpd https://cwip-shaka-proxy.appspot.com/no_auth</i>
-''', parse_mode="HTML")
+<b>Eg:</b> <i>https://cdn.bitmovin.com/content/assets/art-of-motion_drm/mpds/11331.mpd https://cwip-shaka-proxy.appspot.com/no_auth</i> <code>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36</code>  
+''', parse_mode="HTML", quote=True)
     elif len(str(msg.text).split(maxsplit=1)) == 2:
         # message.reply('<b>Keys are being extracting . . .</b>')
-        message1 = await msg.reply_html('<b>Keys are being extracted . </b>')
+        message1 = await msg.reply_html('<b>Keys are being extracted . </b>', quote=True)
         sleep(0.5)
         message1 = await message1.edit_text('<b>Keys are being extracted . .</b>', parse_mode='HTML')
         sleep(0.5)
@@ -142,7 +142,7 @@ Chose video quality for download:
         </b>''', parse_mode='HTML', reply_markup=vid)
 
     else:
-        await msg.reply_html('<b>Syntax error! use /help</b>')
+        await msg.reply_html('<b>Syntax error! use /help</b>', quote=True)
         return
 
 app.add_handler(CommandHandler("start", start))
