@@ -11,13 +11,15 @@ import os, glob
 from pyrogram import Client
 
 dict = {}
+proxy1 = dict(scheme="socks5", hostname="216.241.193.166", port=8111) 
 
 client = Client(
     name="pyrogrammm",
     api_id=17872567,
     api_hash='6aea250af9d83f85a9adc8e34705415a',
     bot_token='5452169338:AAGCq9zOWxcBz_YNp73F4dV4JIxDDfWT7Dc',
-    no_updates=True
+    no_updates=True,
+    proxy=proxy1
 )
 
 app = ApplicationBuilder().token("5452169338:AAGCq9zOWxcBz_YNp73F4dV4JIxDDfWT7Dc").build()
