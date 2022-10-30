@@ -54,10 +54,12 @@ Chose audio quality for download
         print(dict)
         result = await down(vid_id, aud_id, mpdURL, user)
         if result == 'OK':
+            await query.edit_message_text("<i>Decrypting video...</i>", parse_mode='HTML')
             result2 = await decr(keys)
             if result2 == 'OK':
+                await query.edit_message_text("<i>Uploading video...</i>", parse_mode='HTML')
                 await send()
-
+                await query.delete_message()
 
 def cleanup(path):
     leftover_files = glob.glob(path + '/*.mp4', recursive=True)
