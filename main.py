@@ -53,7 +53,7 @@ Chose audio quality for download
             dic[user] += 1
         except:
             dic.update({user: 1})
-        print(dict)
+        print(dic)
         result = await down(vid_id, aud_id, mpdURL, user)
         if result == 'OK':
             await query.edit_message_text("<i>Decrypting video...</i>", parse_mode='HTML')
