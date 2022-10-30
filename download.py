@@ -17,7 +17,7 @@ async def down(vid, aid, url, uid):
     except Exception as e:
         return
 
-async def decr(update: Update, context: ContextTypes.DEFAULT_TYPE, keys):
+async def decr(keys):
     try:
         try:
             working_dir = os.getcwd() + "/working_dir"
