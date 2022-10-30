@@ -10,7 +10,7 @@ from download import down, decr
 import os, glob
 from pyrogram import Client
 
-dict = {}
+dic = {}
 proxy1 = dict(scheme="socks5", hostname="216.241.193.166", port=8111) 
 
 client = Client(
@@ -50,9 +50,9 @@ Chose audio quality for download
         await query.edit_message_text("<i>Downloading...</i>", parse_mode='HTML')
         user = query.from_user.id
         try:
-            dict[user] += 1
+            dic[user] += 1
         except:
-            dict.update({user: 1})
+            dic.update({user: 1})
         print(dict)
         result = await down(vid_id, aud_id, mpdURL, user)
         if result == 'OK':
