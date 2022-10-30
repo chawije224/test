@@ -19,7 +19,7 @@ client = Client(
     api_hash='6aea250af9d83f85a9adc8e34705415a',
     bot_token='5452169338:AAGCq9zOWxcBz_YNp73F4dV4JIxDDfWT7Dc',
     no_updates=True,
-    proxy=proxy1
+    ipv6=True
 )
 
 app = ApplicationBuilder().token("5452169338:AAGCq9zOWxcBz_YNp73F4dV4JIxDDfWT7Dc").build()
